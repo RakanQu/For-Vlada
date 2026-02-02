@@ -1,0 +1,102 @@
+border: none;
+            padding: 15px 40px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 20px;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.5);
+            transition: all 0.4s;
+        }
+
+        #play-pause:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(199, 21, 133, 0.7);
+        }
+
+        audio { display: none; }
+    </style>
+</head>
+<body>
+    <div class="stars">
+        <div class="stars1"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+    </div>
+
+    <div class="cats"></div>
+
+    <div class="image-viewer">
+        <img id="current-image" src="" alt="Our Special Moments 💖">
+        <div class="nav-buttons">
+            <button id="prev-btn">← Previous Memory</button>
+            <button id="next-btn">Next Memory →</button>
+        </div>
+    </div>
+
+    <div class="music-player">
+        <button id="play-pause">Play Our Song ♡</button>
+        <audio id="audio-player" loop>
+            <source src="your-song.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        // Your images array (add your photos!)
+        const images = [
+            'https://via.placeholder.com/440?text=Our+First+Date',
+            'https://via.placeholder.com/440?text=You+&+Me',
+            // Add real URLs...
+        ];
+
+        let currentIndex = 0;
+        const imageElement = document.getElementById('current-image');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        function showImage(index) {
+            if (index < 0) index = images.length - 1;
+            if (index >= images.length) index = 0;
+            currentIndex = index;
+            imageElement.src = images[currentIndex];
+        }
+
+        prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
+        nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
+        showImage(0);
+
+        // Music controls
+        const audio = document.getElementById('audio-player');
+        const playPauseBtn = document.getElementById('play-pause');
+        let isPlaying = false;
+
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playPauseBtn.textContent = 'Play Our Song ♡';
+            } else {
+                audio.play();
+                playPauseBtn.textContent = 'Pause ♡';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Cats (add more romantic cat images!)
+        const catsContainer = document.querySelector('.cats');
+        const catImages = [
+            'https://via.placeholder.com/60?text=😻',
+            // Replace with cute cartoon cats holding hearts, etc.
+        ];
+
+        function createCat() {
+            const cat = document.createElement('img');
+            cat.classList.add('cat');
+            cat.src = catImages[Math.floor(Math.random() * catImages.length)];
+            cat.style.left = ${Math.random() * 100}vw;
+            cat.style.top = ${Math.random() * 100}vh;
+            cat.style.animationDelay = ${Math.random() * 12}s;
+            catsContainer.appendChild(cat);
+        }
+
+        for (let i = 0; i < 30; i++) createCat(); // More cats for extra cuteness!
+    </script>
+</body>
+</html>
